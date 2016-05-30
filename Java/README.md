@@ -1,2 +1,0 @@
-# HuffSplit (Java)
-HuffSplit (Java)
