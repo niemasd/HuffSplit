@@ -453,6 +453,7 @@ int compress( string INFILE, string OUTFILE ) {
     byte T[L];
     int SA[L];
     sais(T,SA,L);
+    // TODO
 
     // get optimal cuts
     int C[2][NUMTOPS];

@@ -1,6 +1,7 @@
 ### HUFFSPLIT ###
 HuffSplit
 *.txt
+*.hsf
 
 ### C++ ###
 # Compiled Object files
