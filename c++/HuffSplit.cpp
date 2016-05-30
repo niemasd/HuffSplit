@@ -14,8 +14,24 @@
  *
  * NOTE: Because of the DP algorithm to find optimal cuts, the message MUST be able to fit comfortably into RAM!!!
  */
+// definitions
+#ifndef NUMTOPS
+#define NUMTOPS 165
+#endif
+
+// includes
 #include<iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
 using namespace std;
+
+// global variables
+unordered_map<char,string> test;
+//vector<unordered_map<char,string>> TOPS (NUMTOPS);
+
+/* MAIN METHOD
+ */
 int main() {
     cout << "HI" << endl;
 }
