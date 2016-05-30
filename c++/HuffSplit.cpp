@@ -28,6 +28,7 @@ typedef unsigned char byte;
 #include <string>
 #include <unordered_map>
 #include <stdlib.h>
+#include "sais.c"
 using namespace std;
 
 // global variables
@@ -447,6 +448,11 @@ int compress( string INFILE, string OUTFILE ) {
         in = in.substr(0,in.size()-1);
     }
     const int L = in.size();
+
+    // build suffix array
+    byte T[L];
+    int SA[L];
+    sais(T,SA,L);
 
     // get optimal cuts
     int C[2][NUMTOPS];
