@@ -33,6 +33,19 @@ using namespace std;
 // global variables
 vector<unordered_map<char,string>> TOPS (NUMTOPS);
 
+/* Helper Class: Node
+ */
+class Node {
+    public:
+        char symbol;
+        Node* c0 = NULL;
+        Node* c1 = NULL;
+        Node( char s );
+};
+Node::Node( char s ) {
+    symbol = s;
+}
+
 /* Given an integer, return the corresponding topology (see Topologies.pptx)
  * INPUT:  An integer (between 0 and 164, inclusive)
  * OUTPUT: A HashMap containing the code of the corresponding topology
@@ -227,6 +240,194 @@ unordered_map<char,string> getCode( int topology ) {
     return code;
 }
 
+/* Given an integer, return the corresponding tree (see Topologies.pptx)
+ * INPUT:  An integer (between 0 and 164, inclusive)
+ * OUTPUT: The root node of the corresponding tree
+ */
+Node* buildTree( int topology ) {
+    unordered_map<char,string> code = getCode(topology);
+    Node* root = new Node((char)0);
+    if(topology < 5) {
+        return root;
+    }
+    else if(topology < 15) {
+        for(auto kv : code) {
+            if(kv.second == "1") {
+                root->c1 = new Node(kv.first);
+            }
+            else {
+                root->c0 = new Node(kv.first);
+            }
+        }
+    }
+    else if(topology < 45) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        for(auto kv : code) {
+            if(kv.second == "1") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "01") {
+                nodeB = new Node(kv.first);
+            }
+            else {
+                nodeC = new Node(kv.first);
+            }
+        }
+        root->c1 = nodeA;
+        root->c0 = new Node((char)0);
+        root->c0->c1 = nodeB;
+        root->c0->c0 = nodeC;
+    }
+    else if(topology < 50) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        Node* nodeD = NULL;
+        for(auto kv : code) {
+            if(kv.second == "11") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "10") {
+                nodeB = new Node(kv.first);
+            }
+            else if(kv.second == "01") {
+                nodeC = new Node(kv.first);
+            }
+            else {
+                nodeD = new Node(kv.first);
+            }
+        }
+    }
+    else if(topology < 90) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        Node* nodeD = NULL;
+        for(auto kv : code) {
+            if(kv.second == "1") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "01") {
+                nodeB = new Node(kv.first);
+            }
+            else if(kv.second == "001") {
+                nodeC = new Node(kv.first);
+            }
+            else {
+                nodeD = new Node(kv.first);
+            }
+        }
+        root->c1 = nodeA;
+        root->c0 = new Node((char)0);
+        root->c0->c1 = nodeB;
+        root->c0->c0 = new Node((char)0);
+        root->c0->c0->c1 = nodeC;
+        root->c0->c0->c0 = nodeD;
+    }
+    else if(topology < 150) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        Node* nodeD = NULL;
+        Node* nodeE = NULL;
+        for(auto kv : code) {
+            if(kv.second == "1") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "01") {
+                nodeB = new Node(kv.first);
+            }
+            else if(kv.second == "001") {
+                nodeC = new Node(kv.first);
+            }
+            else if(kv.second == "0001") {
+                nodeD = new Node(kv.first);
+            }
+            else {
+                nodeE = new Node(kv.first);
+            }
+        }
+        root->c1 = nodeA;
+        root->c0 = new Node((char)0);
+        root->c0->c1 = nodeB;
+        root->c0->c0 = new Node((char)0);
+        root->c0->c0->c1 = nodeC;
+        root->c0->c0->c0 = new Node((char)0);
+        root->c0->c0->c0->c1 = nodeD;
+        root->c0->c0->c0->c0 = nodeE;
+    }
+    else if(topology < 160) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        Node* nodeD = NULL;
+        Node* nodeE = NULL;
+        for(auto kv : code) {
+            if(kv.second == "11") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "10") {
+                nodeB = new Node(kv.first);
+            }
+            else if(kv.second == "01") {
+                nodeC = new Node(kv.first);
+            }
+            else if(kv.second == "001") {
+                nodeD = new Node(kv.first);
+            }
+            else {
+                nodeE = new Node(kv.first);
+            }
+        }
+        root->c1 = new Node((char)0);
+        root->c1->c1 = nodeA;
+        root->c1->c0 = nodeB;
+        root->c0 = new Node((char)0);
+        root->c0->c1 = nodeC;
+        root->c0->c0 = new Node((char)0);
+        root->c0->c0->c1 = nodeD;
+        root->c0->c0->c0 = nodeE;
+    }
+    else if(topology < 165) {
+        Node* nodeA = NULL;
+        Node* nodeB = NULL;
+        Node* nodeC = NULL;
+        Node* nodeD = NULL;
+        Node* nodeE = NULL;
+        for(auto kv : code) {
+            if(kv.second == "1") {
+                nodeA = new Node(kv.first);
+            }
+            else if(kv.second == "011") {
+                nodeB = new Node(kv.first);
+            }
+            else if(kv.second == "010") {
+                nodeC = new Node(kv.first);
+            }
+            else if(kv.second == "001") {
+                nodeD = new Node(kv.first);
+            }
+            else {
+                nodeE = new Node(kv.first);
+            }
+        }
+        root->c1 = nodeA;
+        root->c0 = new Node((char)0);
+        root->c0->c1 = new Node((char)0);
+        root->c0->c1->c1 = nodeB;
+        root->c0->c1->c0 = nodeC;
+        root->c0->c0 = new Node((char)0);
+        root->c0->c0->c1 = nodeD;
+        root->c0->c0->c0 = nodeE;
+    }
+    else {
+        cerr << "ERROR: Trying to get tree for topology > 164!" << endl << endl; exit(-1);
+    }
+    return root;
+}
+
 /* Compress the input file using my split Huffman algorithm
  * INPUT:  A DNA string to compress
  * OUTPUT: The compressed results of my split Huffman algorithm
@@ -368,7 +569,72 @@ int compress( string INFILE, string OUTFILE ) {
  * OUTPUT: The uncompressed file
  */
 int decompress( string INFILE, string OUTFILE ) {
-    // TODO
+    // set up IO streams
+    ifstream in(INFILE, ios::binary);
+    ofstream out(OUTFILE);
+
+    // decompress file
+    while(true) {
+        byte top = in.get();
+        int numChars;
+        in.read((char*)&numChars,sizeof(numChars));
+        if(top < 5) {
+            char symbol = 'Z';
+            switch(top) {
+                case 0: symbol = 'A'; break;
+                case 1: symbol = 'C'; break;
+                case 2: symbol = 'G'; break;
+                case 3: symbol = 'T'; break;
+                case 4: symbol = 'N'; break;
+                default: cerr << "ERROR: Unrecognized topology: " << top << endl << endl; exit(-1);
+            }
+            for(int i = 0; i < numChars; ++i) {
+                out << symbol;
+            }
+        }
+        else {
+            Node* root = buildTree(top);
+            Node* c = root;
+            int printed = 0;
+            while(printed < numChars) {
+                byte buf = in.get();
+                for(int i = 7; i >= 0; --i) {
+                    int bit = (buf >> i) & 1;
+                    if(bit == 0) {
+                        if(c->c0 != NULL) {
+                            c = c->c0;
+                            if(c->c1 == NULL && c->c0 == NULL) {
+                                out << c->symbol;
+                                if(++printed == numChars) {
+                                    break;
+                                }
+                                c = root;
+                            }
+                        }
+                        else {
+                            cerr << "ERROR: Invalid c0" << endl << endl; exit(-1);
+                        }
+                    }
+                    else {
+                        if(c->c1 != NULL) {
+                            c = c->c1;
+                            if(c->c1 == NULL && c->c0 == NULL) {
+                                out << c->symbol;
+                                if(++printed == numChars) {
+                                    break;
+                                }
+                                c = root;
+                            }
+                        }
+                        else {
+                            cerr << "ERROR: Invalid c1" << endl << endl; exit(-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 /* MAIN METHOD
