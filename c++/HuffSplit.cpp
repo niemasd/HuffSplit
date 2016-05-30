@@ -235,7 +235,7 @@ unordered_map<char,string> getCode( int topology ) {
         case 164: code['N'] = "1"; code['A'] = "011"; code['C'] = "010"; code['G'] = "001"; code['T'] = "000"; break;
         
         // Out of Bounds
-        default: cerr << "INVALID TREE TOPOLOGY" << endl << endl; exit(-1);
+        default: cerr << "INVALID TREE TOPOLOGY: " << topology  << endl << endl; exit(-1);
     }
     return code;
 }
@@ -299,6 +299,12 @@ Node* buildTree( int topology ) {
                 nodeD = new Node(kv.first);
             }
         }
+        root->c1 = new Node((char)0);
+        root->c0 = new Node((char)0);
+        root->c1->c1 = nodeA;
+        root->c1->c0 = nodeB;
+        root->c0->c1 = nodeC;
+        root->c0->c0 = nodeD;
     }
     else if(topology < 90) {
         Node* nodeA = NULL;
@@ -436,6 +442,10 @@ int compress( string INFILE, string OUTFILE ) {
     // read input file as string 'in'
     ifstream infile(INFILE);
     string in(static_cast<stringstream const&>(stringstream() << infile.rdbuf()).str());
+    char last = in[in.size()-1];
+    if(last != 'A' && last != 'C' && last != 'G' && last != 'T' && last != 'N') {
+        in = in.substr(0,in.size()-1);
+    }
     const int L = in.size();
 
     // get optimal cuts
@@ -576,6 +586,9 @@ int decompress( string INFILE, string OUTFILE ) {
     // decompress file
     while(true) {
         byte top = in.get();
+        if(top == 255) {
+            break;
+        }
         int numChars;
         in.read((char*)&numChars,sizeof(numChars));
         if(top < 5) {
@@ -593,7 +606,7 @@ int decompress( string INFILE, string OUTFILE ) {
             }
         }
         else {
-            Node* root = buildTree(top);
+            Node* root = buildTree((int)top);
             Node* c = root;
             int printed = 0;
             while(printed < numChars) {
